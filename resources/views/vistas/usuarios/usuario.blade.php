@@ -1,33 +1,33 @@
 <x-app-layout>
-<div class="container mx-auto px-4 py-6">
+<div>
 
-    <h1 class="text-3xl font-extrabold mb-6">Gestión de Usuarios</h1>
+    <h1>Gestión de Usuarios</h1>
 
-    <button onclick="openModal('create')" class="btn btn-green mb-6">
+    <button onclick="openModal('create')">
         Nuevo Usuario
     </button>
 
-    <table class="table-auto w-full border-collapse border border-gray-300 shadow-md">
+    <table>
         <thead>
-            <tr class="bg-guatemala-yellow-light">
-                <th class="border border-gray-300 px-4 py-3 text-left">ID</th>
-                <th class="border border-gray-300 px-4 py-3 text-left">Nombre</th>
-                <th class="border border-gray-300 px-4 py-3 text-left">Email</th>
-                <th class="border border-gray-300 px-4 py-3 text-left">Rol</th>
-                <th class="border border-gray-300 px-4 py-3 text-center">Acciones</th>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($users as $user)
-            <tr class="hover-row">
-                <td class="border border-gray-300 px-4 py-2">{{ $user->id }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $user->name }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $user->email }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $user->role->nombre ?? 'Sin rol' }}</td>
-                <td class="border border-gray-300 px-4 py-2 text-center">
-                    <button onclick='openModal("view", @json($user))' class="btn btn-green">Ver</button>
-                    <button onclick='openModal("edit", @json($user))' class="btn btn-orange">Editar</button>
-                    <button onclick='openModal("delete", @json($user))' class="btn btn-red">Eliminar</button>
+            <tr>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->role->nombre ?? 'Sin rol' }}</td>
+                <td>
+                    <button onclick='openModal("view", @json($user))'>Ver</button>
+                    <button onclick='openModal("edit", @json($user))'>Editar</button>
+                    <button onclick='openModal("delete", @json($user))'>Eliminar</button>
                 </td>
             </tr>
             @endforeach
