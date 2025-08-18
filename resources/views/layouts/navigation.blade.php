@@ -66,9 +66,14 @@
         <x-nav-link :href="route('almacenamiento')" :active="request()->routeIs('almacenamiento')">
             Almacenamiento
         </x-nav-link>
-        <x-nav-link :href="route('admin.usuarios')" :active="request()->routeIs('admin.usuarios')">
-            Usuarios
+        <nav class="flex-1 overflow-y-auto py-4 px-2 space-y-2">
+    @foreach ($menuOptions as $option)
+        <x-nav-link :href="route($option->ruta)" :active="request()->routeIs($option->ruta)">
+            <span class="ml-2">{{ $option->opcion }}</span>
         </x-nav-link>
+    @endforeach
+</nav>
+
     </nav>
 
     <div class="user-info" x-show="sidebarOpen" x-transition>
