@@ -18,10 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('id', '<>', Auth::id())->get();
-        $roles = Role::where('id', '!=', 1)->get();
-
-        return view('vistas.usuarios.usuario', compact('users', 'roles'));
+        return view('vistas.usuarios.usuario');
     }
 
     public function listado()
@@ -62,6 +59,10 @@ class UserController extends Controller
         $user->password = Hash::make($validated['password']);
         $user->save();
 
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Usuario creado correctamente.'], 201);
+        }
+
         return redirect()->route('users.index')->with('success', 'Usuario creado correctamente.');
     }
 
@@ -84,15 +85,31 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => "required|email|unique:users,email,{$id}",
+            'role_id' => 'required|exists:roles,id',
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
 
-        $user->update($data);
-        return redirect()->back()->with('success', 'Usuario actualizado.');
+        $user = User::findOrFail($id);
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->role_id = $validated['role_id'];
+
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        $user->save();
+
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Usuario actualizado con éxito.']);
+        }
+
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado con éxito.');
     }
 
     /**
@@ -100,7 +117,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return redirect()->back()->with('success', 'Usuario eliminado.');
+        //solo se actulizara el campo deleted_at
+        $user->deleted_at = now();
+        $user->save();
+
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Usuario eliminado con éxito.']);
+        }
+
+        return redirect()->route('users.index')->with('success', 'Usuario eliminado con éxito.');
     }
 }
