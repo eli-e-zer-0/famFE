@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +32,13 @@ Route::middleware('auth')->group(function () {
 Route::get('/almacenamiento', function () {
     return view('vistas.almacenamiento.almacenamiento');
 })->name('almacenamiento');
+
+// CRUD usuarios
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/usuarios', [UserController::class, 'index'])->name('admin.usuarios');
+    Route::post('/admin/usuarios', [UserController::class, 'store'])->name('admin.usuarios.store');
+    Route::put('/admin/usuarios/{user}', [UserController::class, 'update'])->name('admin.usuarios.update');
+    Route::delete('/admin/usuarios/{user}', [UserController::class, 'destroy'])->name('admin.usuarios.destroy');
+});
 
 require __DIR__.'/auth.php';

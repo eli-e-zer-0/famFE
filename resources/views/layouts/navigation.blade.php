@@ -66,9 +66,8 @@
         <x-nav-link :href="route('almacenamiento')" :active="request()->routeIs('almacenamiento')">
             Almacenamiento
         </x-nav-link>
-
-        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-            Vista 2
+        <x-nav-link :href="route('admin.usuarios')" :active="request()->routeIs('admin.usuarios')">
+            Usuarios
         </x-nav-link>
     </nav>
 
