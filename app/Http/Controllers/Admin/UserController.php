@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -17,16 +18,21 @@ class UserController extends Controller
      */
     public function index()
     {
-        Log::info('index');
         $users = User::where('id', '<>', Auth::id())->get();
         $roles = Role::where('id', '!=', 1)->get();
 
-        Log::info("users");
-        Log::info($users);
-        Log::info("roles");
-        Log::info($roles);
-
         return view('vistas.usuarios.usuario', compact('users', 'roles'));
+    }
+
+    public function listado()
+    {
+        $users = User::where('id', '<>', Auth::id())->get();
+        $roles = Role::where('id', '!=', 1)->get();
+
+        return response()->json([
+            'users' => $users,
+            'roles' => $roles,
+        ]);
     }
 
     /**
@@ -42,16 +48,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'role_id' => 'required|exists:roles,id',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $data['password'] = bcrypt($data['password']);
-        User::create($data);
+        $user = new User();
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->role_id = $validated['role_id'];
+        $user->password = Hash::make($validated['password']);
+        $user->save();
 
-        return redirect()->back()->with('success', 'Usuario creado.');
+        return redirect()->route('users.index')->with('success', 'Usuario creado correctamente.');
     }
 
     /**

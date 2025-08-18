@@ -21,13 +21,15 @@ function openModal(type, user=null) {
     deleteContent.classList.add('hidden');
 
     if(type === 'create') {
+        console.log('crear un nuevo usuario');
         modalTitle.textContent = 'Crear Nuevo Usuario';
         formMethodInput.value = 'POST';
-        userForm.action = '/usuarios'; // Cambia según tu ruta POST
+        userForm.action = '/admin/usuarios/store';
         document.getElementById('password').required = true;
         document.getElementById('password_confirmation').required = true;
     }
     else if(type === 'edit') {
+        console.log('editar un usuario');
         modalTitle.textContent = 'Editar Usuario';
         formMethodInput.value = 'PUT';
         userForm.action = `/usuarios/${user.id}`; // Cambia según ruta PUT
@@ -38,6 +40,7 @@ function openModal(type, user=null) {
         document.getElementById('password_confirmation').required = false;
     }
     else if(type === 'view') {
+        console.log('ver un usuario');
         modalTitle.textContent = 'Ver Usuario';
         modalContent.classList.add('hidden');
         modalButtons.classList.add('hidden');
@@ -48,6 +51,7 @@ function openModal(type, user=null) {
         document.getElementById('viewRole').textContent = user.role?.nombre ?? 'Sin rol';
     }
     else if(type === 'delete') {
+        console.log('eliminar un usuario');
         modalTitle.textContent = 'Eliminar Usuario';
         modalContent.classList.add('hidden');
         modalButtons.classList.add('hidden');
