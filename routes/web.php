@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\almacenamientoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,14 +34,27 @@ Route::get('/almacenamiento', function () {
     return view('vistas.almacenamiento.almacenamiento');
 })->name('almacenamiento');
 
+// Listados
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/usuarios/listado', [UserController::class, 'listado'])->name('admin.listado');
+    Route::get('/admin/roles/listado', [UserController::class, 'listado'])->name('admin.roles');
+});
+
+
 // CRUD usuarios
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/usuarios', [UserController::class, 'index'])->name('admin.usuarios');
-    Route::get('/admin/usuarios/listado', [UserController::class, 'listado'])->name('admin.listado');
-    Route::get('/admin/roles/listado', [UserController::class, 'listado'])->name('admin.roles');
     Route::post('/admin/usuarios/store', [UserController::class, 'store'])->name('usuarios.store');
     Route::put('/admin/usuarios/{user}', [UserController::class, 'update'])->name('usuarios.update');
     Route::delete('/admin/usuarios/{user}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+});
+
+// CRUD almacenamiento
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/almacenamiento', [almacenamientoController::class, 'index'])->name('admin.almacenamiento');
+    Route::post('/admin/almacenamiento/store', [almacenamientoController::class, 'store'])->name('almacenamiento.store');
+    Route::put('/admin/almacenamiento/{user}', [almacenamientoController::class, 'update'])->name('almacenamiento.update');
+    Route::delete('/admin/almacenamiento/{user}', [almacenamientoController::class, 'destroy'])->name('almacenamiento.destroy');
 });
 
 require __DIR__ . '/auth.php';
