@@ -14,26 +14,35 @@ class almacenamientoController extends Controller
      */
     public function index()
     {
-        $productos = DB::table('vws_Almacenamiento')->get();
 
-        $headers = [];
-        $rows = [];
-
-        if ($productos->count() > 0) {
-            $headers = array_keys((array) $productos->first());
-
-            foreach ($productos as $producto) {
-                $rows[] = (array) $producto;
-            }
-        }
-
-        // agregamos columna encabezados
-        $headers[] = 'Acciones';
-
-        return view('vistas.almacenamiento.almacenamiento', compact('headers', 'rows'));
+        return view('vistas.almacenamiento.almacenamiento');
     }
 
+    public function data()
+    {
+        try {
+            $productos = DB::table('vws_Almacenamiento')->get();
 
+            $headers = [];
+            $rows = [];
+
+            if ($productos->count() > 0) {
+                $headers = array_keys((array) $productos->first());
+
+                foreach ($productos as $producto) {
+                    $rows[] = (array) $producto;
+                }
+            }
+
+            // agregamos columna encabezados
+            $headers[] = 'Acciones';
+
+            return response()->json(['headers' => $headers, 'rows' => $rows], 200);
+        } catch (\Exception $e) {
+            Log::error('Error fetching almacenamiento data: ' . $e->getMessage());
+            return response()->json(['error' => 'Failed to fetch data'], 500);
+        }
+    }
 
     /**
      * Show the form for creating a new resource.

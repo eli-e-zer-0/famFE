@@ -15,46 +15,10 @@ function abrirModalCrear() {
     abrirModal('almacenamientoModal');
 }
 
-function abrirModalEditar(datos) {
-    limpiarFormulario();
-
-    console.log('aqui vamos a editar');
-
-    console.log(datos);
-
-    // Asignar datos al formulario
-    document.getElementById('producto_id').value = datos.producto_id;
-    document.getElementById('nombre').value = datos.nombre;
-    document.getElementById('descripcion').value = datos.descripcion;
-    document.getElementById('precio').value = datos.precio;
-
-    // Cambiar la acción del formulario al update
-    const form = document.getElementById('formAlmacenamiento');
-    form.action = `/almacenamiento/${datos.producto_id}`;
-    document.getElementById('formMethod').value = 'PUT';
-
-    abrirModal('almacenamientoModal');
-}
-
 function limpiarFormulario() {
     document.getElementById('formAlmacenamiento').reset();
     document.getElementById('producto_id').value = '';
 }
-
-// Asociar evento a botones de editar
-document.querySelectorAll('.btn-editar').forEach((btn, index) => {
-    btn.addEventListener('click', () => {
-        const row = btn.closest('tr').querySelectorAll('td');
-        const datos = {
-            producto_id: row[1].textContent.trim(), // Asegúrate que sea la posición correcta
-            nombre: row[2].textContent.trim(),
-            descripcion: row[3].textContent.trim(),
-            precio: row[4].textContent.trim()
-        };
-
-        abrirModalEditar(datos);
-    });
-});
 
 // Cambiar botón de agregar
 document.querySelector('button[onclick*="abrirModal"]').setAttribute('onclick', 'abrirModalCrear()');
@@ -99,27 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const id = filaAEliminar.dataset.id;
 
-        // fetch(`/almacenamiento/${id}`, {
-        //     method: 'DELETE',
-        //     headers: {
-        //         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-        //         'Accept': 'application/json',
-        //     }
-        // }).then(res => {
-        //     if (res.ok) {
-        //         filaAEliminar.remove();
-        //         alert('Registro eliminado correctamente');
-        //     } else {
-        //         alert('Error al eliminar registro');
-        //     }
-        //     ocultarModal();
-        //     filaAEliminar = null;
-        // }).catch(() => {
-        //     alert('Error en la conexión');
-        //     ocultarModal();
-        //     filaAEliminar = null;
-        // });
-
         console.log('Registro eliminado correctamente');
         ocultarModal();
     });
@@ -140,3 +83,80 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+/////////////////////////////////////////////////
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchTablaAlmacenamiento();
+});
+
+function fetchTablaAlmacenamiento() {
+    fetch('/admin/almacenamiento/data')
+        .then(res => res.json())
+        .then(data => {
+            if (data.headers && data.rows) {
+                renderTabla(data.headers, data.rows);
+            } else {
+                document.getElementById('contenedor-tabla').innerHTML = '<p>No hay datos disponibles.</p>';
+            }
+        })
+        .catch(err => {
+            console.error('Error al cargar datos de almacenamiento:', err);
+            document.getElementById('contenedor-tabla').innerHTML = '<p>Error al cargar la tabla.</p>';
+        });
+}
+
+function renderTabla(headers, rows) {
+    let tablaHTML = '<table class="table-auto w-full border border-gray-300">';
+    tablaHTML += '<thead><tr>';
+
+    headers.forEach(header => {
+        tablaHTML += `<th class="px-4 py-2 border">${header}</th>`;
+    });
+
+    tablaHTML += '</tr></thead><tbody>';
+
+    rows.forEach(row => {
+        tablaHTML += '<tr data-id="' + row.id + '">';
+        headers.forEach(header => {
+            if (header === 'Acciones') {
+                tablaHTML += `<td class="px-4 py-2 border text-center">
+                    <button class="btn btn-ver btn-editar" data-id="${row.id}">Editar</button>
+                    <button class="btn btn-eliminar" data-id="${row.id}">Eliminar</button>
+                </td>`;
+            } else {
+                tablaHTML += `<td class="px-4 py-2 border">${row[header] ?? ''}</td>`;
+            }
+        });
+        tablaHTML += '</tr>';
+    });
+
+    tablaHTML += '</tbody></table>';
+
+    document.getElementById('contenedor-tabla').innerHTML = tablaHTML;
+
+    // Reasignar eventos a los botones de eliminar, editar, etc.
+    asignarEventosBotones();
+}
+
+function asignarEventosBotones() {
+    document.querySelectorAll('.btn-eliminar').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.preventDefault();
+            const id = e.target.dataset.id;
+            console.log('Eliminar ID:', id);
+            // Aquí puedes abrir el modal de confirmación, etc.
+        });
+    });
+
+    document.querySelectorAll('.btn-editar').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.preventDefault();
+            const id = e.target.dataset.id;
+            console.log('Editar ID:', id);
+            // Aquí puedes abrir el modal con datos del producto
+        });
+    });
+}
+

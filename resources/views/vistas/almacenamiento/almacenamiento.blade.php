@@ -5,7 +5,7 @@
         <button onclick="abrirModal('almacenamientoModal')" class="btn btn-ver">Agregar</button>
     </div>
 
-    <x-table :headers="$headers" :rows="$rows" />
+    <div id="contenedor-tabla"></div>
 
     <x-modal id="almacenamientoModal" title="Agregar Almacenamiento">
         <form id="formAlmacenamiento" method="POST">
