@@ -38,10 +38,10 @@ document.querySelectorAll('.btn-editar').forEach((btn, index) => {
     btn.addEventListener('click', () => {
         const row = btn.closest('tr').querySelectorAll('td');
         const datos = {
-            producto_id: row[0].textContent.trim(), // Asegúrate que sea la posición correcta
-            nombre: row[1].textContent.trim(),
-            descripcion: row[2].textContent.trim(),
-            precio: row[3].textContent.trim()
+            producto_id: row[1].textContent.trim(), // Asegúrate que sea la posición correcta
+            nombre: row[2].textContent.trim(),
+            descripcion: row[3].textContent.trim(),
+            precio: row[4].textContent.trim()
         };
 
         abrirModalEditar(datos);
