@@ -14,24 +14,23 @@ class almacenamientoController extends Controller
      */
     public function index()
     {
-        //vista
         $productos = DB::table('vws_Almacenamiento')->get();
 
-        //encabezados
-        $headers = ['Tienda', 'Producto', 'Descripción', 'Precio'];
+        $headers = [];
         $rows = [];
 
-        foreach ($productos as $producto) {
-            $rows[] = [
-                $producto->tienda,
-                $producto->producto,
-                $producto->descripcion,
-                $producto->precio,
-            ];
+        if ($productos->count() > 0) {
+            $headers = array_keys((array) $productos->first());
+
+            foreach ($productos as $producto) {
+                $rows[] = (array) $producto;
+            }
         }
 
         return view('vistas.almacenamiento.almacenamiento', compact('headers', 'rows'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.

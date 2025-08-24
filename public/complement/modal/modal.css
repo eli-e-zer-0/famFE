@@ -77,6 +77,14 @@
     color: #111827;
 }
 
+.btn-eliminar {
+    background-color: #e3342f;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .btn-primary {
     background-color: #3b82f6;
     color: white;
@@ -96,3 +104,9 @@
         font-size: 1.1rem;
     }
 }
+
+.hidden {
+    display: none;
+}
+
+
