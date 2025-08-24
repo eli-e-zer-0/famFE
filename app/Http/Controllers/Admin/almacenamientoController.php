@@ -23,6 +23,8 @@ class almacenamientoController extends Controller
         try {
             $productos = DB::table('vws_Almacenamiento')->get();
 
+            Log::info('Productos: ' . $productos);
+
             $headers = [];
             $rows = [];
 
@@ -89,6 +91,8 @@ class almacenamientoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Log::info("Eliminando producto con ID:" . $id);
+
+        return response()->json(['message' => 'Producto eliminado'], 200);
     }
 }

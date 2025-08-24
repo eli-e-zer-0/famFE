@@ -56,7 +56,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/almacenamiento', [almacenamientoController::class, 'index'])->name('admin.almacenamiento');
     Route::post('/admin/almacenamiento/store', [almacenamientoController::class, 'store'])->name('almacenamiento.store');
     Route::put('/admin/almacenamiento/{user}', [almacenamientoController::class, 'update'])->name('almacenamiento.update');
-    Route::delete('/admin/almacenamiento/{user}', [almacenamientoController::class, 'destroy'])->name('almacenamiento.destroy');
+    Route::delete('/almacenamiento/destroy/{id}', [almacenamientoController::class, 'destroy'])->name('almacenamiento.destroy');
 });
 
 require __DIR__ . '/auth.php';

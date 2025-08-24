@@ -1,4 +1,3 @@
-{{-- resources/views/components/confirmar-modal.blade.php --}}
 <div id="confirmarModal" class="modal-overlay" style="display: none;">
     <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
         <h2 id="modalTitle">Confirmación</h2>
@@ -10,6 +9,3 @@
         </div>
     </div>
 </div>
-
-
-<link href="{{ asset('complement/confirmar-modal/confirmar-modal.css') }}" rel="stylesheet">
