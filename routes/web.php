@@ -40,7 +40,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/usuarios/listado', [UserController::class, 'listado'])->name('admin.listado');
     Route::get('/admin/roles/listado', [UserController::class, 'listado'])->name('admin.roles');
     Route::get('/admin/almacenamiento/data', [almacenamientoController::class, 'data'])->name('admin.data');
-
+    Route::get('/admin/inventario/data', [InventarioController::class, 'data'])->name('admin.inventario.datos');
 });
 
 

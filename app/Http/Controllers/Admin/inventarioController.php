@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\inventarioModel;
+use Illuminate\Support\Facades\Log;
 
 class inventarioController extends Controller
 {
@@ -12,7 +14,15 @@ class inventarioController extends Controller
      */
     public function index()
     {
-        //
+        // retornar a la vista
+        return view('vistas.inventario.inventario');
+    }
+
+    // funcion para obtener los datos de la tabla inventario
+    public function data()
+    {
+        $datos = inventarioModel::all();
+        return response()->json($datos);
     }
 
     /**
@@ -36,7 +46,7 @@ class inventarioController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
