@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\almacenamientoController;
 use App\Http\Controllers\Admin\InventarioController;
+use App\Http\Controllers\Admin\CotizarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/inventario/store', [InventarioController::class, 'store'])->name('inventario.store');
     Route::put('/inventario/update/{id}', [InventarioController::class, 'update'])->name('inventario.update');
     Route::delete('/inventario/destroy/{id}', [InventarioController::class, 'destroy'])->name('inventario.destroy');
+});
+
+// CRUD cotizar
+Route::middleware(['auth'])->group(function () {
+    Route::get('/tienda/cotizar', [CotizarController::class, 'index'])->name('tienda.cotizar');
+    Route::post('/cotizar/store', [CotizarController::class, 'store'])->name('cotizar.store');
+    Route::put('/cotizar/update/{id}', [CotizarController::class, 'update'])->name('cotizar.update');
+    Route::delete('/cotizar/destroy/{id}', [CotizarController::class, 'destroy'])->name('cotizar.destroy');
 });
 
 require __DIR__ . '/auth.php';
