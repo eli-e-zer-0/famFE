@@ -37,7 +37,7 @@ class almacenamientoController extends Controller
             }
 
             // agregamos columna encabezados
-            $headers[] = 'Acciones';
+            // $headers[] = 'Acciones';
 
             return response()->json(['headers' => $headers, 'rows' => $rows], 200);
         } catch (\Exception $e) {

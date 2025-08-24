@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\almacenamientoController;
+use App\Http\Controllers\Admin\InventarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +55,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
 // CRUD almacenamiento
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/almacenamiento', [almacenamientoController::class, 'index'])->name('admin.almacenamiento');
-    Route::post('/admin/almacenamiento/store', [almacenamientoController::class, 'store'])->name('almacenamiento.store');
-    Route::put('/admin/almacenamiento/{user}', [almacenamientoController::class, 'update'])->name('almacenamiento.update');
+    Route::post('/almacenamiento/store', [almacenamientoController::class, 'store'])->name('almacenamiento.store');
+    Route::put('/almacenamiento/update/{user}', [almacenamientoController::class, 'update'])->name('almacenamiento.update');
     Route::delete('/almacenamiento/destroy/{id}', [almacenamientoController::class, 'destroy'])->name('almacenamiento.destroy');
+});
+
+// CRUD inventario
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/inventario', [InventarioController::class, 'index'])->name('admin.inventario');
+    Route::post('/inventario/store', [InventarioController::class, 'store'])->name('inventario.store');
+    Route::put('/inventario/update/{id}', [InventarioController::class, 'update'])->name('inventario.update');
+    Route::delete('/inventario/destroy/{id}', [InventarioController::class, 'destroy'])->name('inventario.destroy');
 });
 
 require __DIR__ . '/auth.php';
