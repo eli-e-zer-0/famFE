@@ -8,8 +8,11 @@
     <x-table :headers="$headers" :rows="$rows" />
 
     <x-modal id="almacenamientoModal" title="Agregar Almacenamiento">
-        <form action="{{ route('almacenamiento.store') }}" method="POST">
+        <form id="formAlmacenamiento" method="POST">
             @csrf
+            <input type="hidden" name="_method" id="formMethod" value="POST">
+            <input type="hidden" name="producto_id" id="producto_id">
+
             <div class="mb-4">
                 <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
                 <input type="text" name="nombre" id="nombre" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
@@ -30,6 +33,7 @@
             </div>
         </form>
     </x-modal>
+
 </x-app-layout>
 
 
@@ -41,14 +45,4 @@
     function cerrarModal(id) {
         document.getElementById(id).classList.add('hidden');
     }
-
-    // Opcional: cerrar al hacer clic fuera del contenido
-    window.addEventListener('click', function(e) {
-        const modales = document.querySelectorAll('.modal');
-        modales.forEach(modal => {
-            if (e.target === modal) {
-                modal.classList.add('hidden');
-            }
-        });
-    });
 </script>
