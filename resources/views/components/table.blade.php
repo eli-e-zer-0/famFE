@@ -12,21 +12,18 @@
                 </th>
                 @endif
                 @endforeach
-                <th scope="col" class="th-estilo th-acciones">
-                    Acciones
-                </th>
             </tr>
         </thead>
         <tbody class="tabla-cuerpo">
+
             @forelse($rows as $index => $row)
-            <tr class="{{ $index % 2 == 0 ? 'fila-par' : 'fila-impar' }}">
+            <tr data-id="{{ $row['id'] ?? '' }}" class="{{ $index % 2 == 0 ? 'fila-par' : 'fila-impar' }}">
                 @foreach($row as $key => $cell)
                 <td class="td-estilo {{ $key === 'producto_id' ? 'hidden' : '' }}">
                     {{ $cell }}
                 </td>
                 @endforeach
                 <td class="td-estilo td-acciones">
-                    <button class="btn btn-editar">Editar</button>
                     <button class="btn btn-eliminar">Eliminar</button>
                 </td>
             </tr>
@@ -37,6 +34,8 @@
                 </td>
             </tr>
             @endforelse
+
+
         </tbody>
     </table>
 </div>

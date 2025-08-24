@@ -27,6 +27,9 @@ class almacenamientoController extends Controller
             }
         }
 
+        // agregamos columna encabezados
+        $headers[] = 'Acciones';
+
         return view('vistas.almacenamiento.almacenamiento', compact('headers', 'rows'));
     }
 

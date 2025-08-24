@@ -34,15 +34,9 @@
         </form>
     </x-modal>
 
+    <x-confirmar-modal id="modalConfirmacion" title="Confirmar acción" />
+
 </x-app-layout>
 
 
-<script>
-    function abrirModal(id) {
-        document.getElementById(id).classList.remove('hidden');
-    }
-
-    function cerrarModal(id) {
-        document.getElementById(id).classList.add('hidden');
-    }
-</script>
+<script src="{{ asset('complement/almacenamiento/almacenamiento.js') }}"></script>

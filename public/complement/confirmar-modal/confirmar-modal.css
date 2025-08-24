@@ -1,0 +1,86 @@
+        .modal-overlay {
+            position: fixed;
+            inset: 0; /* top:0; right:0; bottom:0; left:0 */
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Contenido modal */
+        .modal-content {
+            background: #fff;
+            padding: 24px 32px;
+            border-radius: 12px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Título */
+        .modal-content h2 {
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+            color: #222;
+        }
+
+        /* Texto */
+        .modal-content p {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* Botones */
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .modal-buttons button {
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 28px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            min-width: 100px;
+            user-select: none;
+        }
+
+        /* Botón No */
+        #btnNo {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        #btnNo:hover {
+            background-color: #cacaca;
+        }
+
+        /* Botón Sí */
+        #btnSi {
+            background-color: #007bff;
+            color: white;
+        }
+        #btnSi:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsividad */
+        @media (max-width: 480px) {
+            .modal-content {
+                padding: 20px 24px;
+                width: 95%;
+            }
+
+            .modal-buttons button {
+                padding: 10px 20px;
+                min-width: 80px;
+                font-size: 0.9rem;
+            }
+        }
