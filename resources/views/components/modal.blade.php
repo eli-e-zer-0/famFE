@@ -1,14 +1,30 @@
 @props(['id', 'title'])
 
-<div id="{{ $id }}" class="modal hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-    <div class="bg-white rounded-lg shadow-lg w-full max-w-lg relative p-6">
-        <!-- Botón cerrar -->
-        <button onclick="cerrarModal('{{ $id }}')" class="absolute top-2 right-2 text-gray-600 hover:text-black text-xl">&times;</button>
+<div id="{{ $id }}" class="modal hidden">
+    <!-- Fondo oscuro -->
+    <div class="modal-overlay" onclick="cerrarModal('{{ $id }}')"></div>
+
+    <!-- Contenido del modal -->
+    <div class="modal-content">
+        <!-- Botón cerrar (X) en la esquina superior -->
+        <button class="modal-close" onclick="cerrarModal('{{ $id }}')" aria-label="Cerrar modal">&times;</button>
 
         <!-- Título -->
-        <h2 class="text-xl font-semibold mb-4">{{ $title }}</h2>
+        <h2 class="modal-title">{{ $title }}</h2>
 
-        <!-- Contenido dinámico -->
-        {{ $slot }}
+        <!-- Contenido del modal -->
+        <div class="modal-body">
+            {{ $slot }}
+        </div>
+
+        <!-- Botón "Cerrar" fijo en la parte inferior -->
+        <div class="flex justify-end mt-6">
+            <button type="button" onclick="cerrarModal('{{ $id }}')" class="btn btn-editar">
+                Cerrar
+            </button>
+        </div>
     </div>
 </div>
+
+<link href="{{ asset('complement/modal/modal.css') }}" rel="stylesheet">
+<script src="{{ asset('complement/modal/modal.js') }}"></script>

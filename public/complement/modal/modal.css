@@ -1,26 +1,22 @@
-/* Modal base */
 .modal {
     position: fixed;
     inset: 0;
     z-index: 50;
-    display: none; /* se muestra con JS */
+    display: none;
     justify-content: center;
     align-items: center;
 }
 
-/* Mostrar modal con JS */
 .modal:not(.hidden) {
     display: flex;
 }
 
-/* Fondo oscuro */
 .modal-overlay {
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Contenido del modal */
 .modal-content {
     position: relative;
     background-color: #fff;
@@ -32,7 +28,6 @@
     animation: modalShow 0.3s ease-out;
 }
 
-/* Animación */
 @keyframes modalShow {
     from {
         opacity: 0;
@@ -44,7 +39,6 @@
     }
 }
 
-/* Botón cerrar */
 .modal-close {
     position: absolute;
     top: 0.75rem;
@@ -60,19 +54,38 @@
     color: #000;
 }
 
-/* Título */
 .modal-title {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 1rem;
 }
 
-/* Cuerpo del modal */
 .modal-body {
     font-size: 1rem;
 }
 
-/* Responsive ajustes */
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-editar {
+    background-color: #e5e7eb;
+    color: #111827;
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
 @media (max-width: 640px) {
     .modal-content {
         width: 95%;
