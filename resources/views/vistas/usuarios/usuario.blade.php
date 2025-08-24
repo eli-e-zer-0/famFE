@@ -101,6 +101,6 @@
     </div>
 
     {{-- Incluye CSS y JS --}}
-    <link rel="stylesheet" href="{{ asset('usuarios/usuario.css') }}">
-    <script src="{{ asset('usuarios/usuario.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('complement/usuarios/usuario.css') }}">
+    <script src="{{ asset('complement/usuarios/usuario.js') }}"></script>
 </x-app-layout>

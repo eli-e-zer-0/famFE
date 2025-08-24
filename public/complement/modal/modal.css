@@ -1,0 +1,85 @@
+/* Modal base */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none; /* se muestra con JS */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Mostrar modal con JS */
+.modal:not(.hidden) {
+    display: flex;
+}
+
+/* Fondo oscuro */
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Contenido del modal */
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    max-width: 600px;
+    width: 90%;
+    z-index: 100;
+    animation: modalShow 0.3s ease-out;
+}
+
+/* Animación */
+@keyframes modalShow {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Botón cerrar */
+.modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: #000;
+}
+
+/* Título */
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Cuerpo del modal */
+.modal-body {
+    font-size: 1rem;
+}
+
+/* Responsive ajustes */
+@media (max-width: 640px) {
+    .modal-content {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .modal-title {
+        font-size: 1.1rem;
+    }
+}

@@ -1,38 +1,50 @@
 /* Título */
 .titulo-seccion {
-    font-size: 1.5rem; /* text-2xl */
-    font-weight: 600;  /* font-semibold */
-    color: #2d3748;    /* gray-800 */
-    margin-bottom: 1rem; /* mb-4 */
+    font-size: 1.5rem;
+    /* text-2xl */
+    font-weight: 600;
+    /* font-semibold */
+    color: #2d3748;
+    /* gray-800 */
+    margin-bottom: 1rem;
+    /* mb-4 */
 }
 
 /* Contenedor tabla */
 .tabla-contenedor {
     overflow-x: auto;
-    border-radius: 0.5rem; /* rounded-lg */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* shadow-md */
 }
 
 /* Tabla principal */
 .tabla-principal {
-    width: 100%; /* min-w-full */
+    width: 100%;
+    /* min-w-full */
     border-collapse: collapse;
 }
 
 /* Encabezado tabla */
 .tabla-encabezado {
-    background-color: #4c51bf; /* indigo-600 */
+    background-color: #4c51bf;
+    /* indigo-600 */
     color: white;
 }
 
 /* Estilo para th */
 .th-estilo {
-    padding: 0.75rem 1.5rem; /* px-6 py-3 */
+    padding: 0.75rem 1.5rem;
+    /* px-6 py-3 */
     text-align: left;
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 600; /* font-semibold */
+    font-size: 0.875rem;
+    /* text-sm */
+    font-weight: 600;
+    /* font-semibold */
     text-transform: uppercase;
-    letter-spacing: 0.05em; /* tracking-wide */
+    letter-spacing: 0.05em;
+    /* tracking-wide */
 }
 
 /* Para columna acciones: alineación derecha */
@@ -43,12 +55,14 @@
 /* Cuerpo tabla */
 .tabla-cuerpo {
     background-color: white;
-    border-top: 1px solid #e2e8f0; /* divide-y divide-gray-200 */
+    border-top: 1px solid #e2e8f0;
+    /* divide-y divide-gray-200 */
 }
 
 /* Filas pares */
 .fila-par {
-    background-color: #ebf4ff; /* indigo-50 */
+    background-color: #ebf4ff;
+    /* indigo-50 */
     transition: background-color 0.3s ease;
 }
 
@@ -61,15 +75,19 @@
 /* Hover para filas */
 .fila-par:hover,
 .fila-impar:hover {
-    background-color: #c3dafe; /* indigo-100 */
+    background-color: #c3dafe;
+    /* indigo-100 */
 }
 
 /* Estilo td */
 .td-estilo {
-    padding: 1rem 1.5rem; /* px-6 py-4 */
+    padding: 1rem 1.5rem;
+    /* px-6 py-4 */
     white-space: nowrap;
-    color: #2d3748; /* gray-800 */
-    font-size: 0.875rem; /* text-sm */
+    color: #2d3748;
+    /* gray-800 */
+    font-size: 0.875rem;
+    /* text-sm */
 }
 
 /* Alineación derecha en td */
@@ -82,8 +100,10 @@
 /* Botones */
 .btn {
     color: white;
-    padding: 0.25rem 0.75rem; /* py-1 px-3 */
-    border-radius: 0.375rem; /* rounded-md */
+    padding: 0.25rem 0.75rem;
+    /* py-1 px-3 */
+    border-radius: 0.375rem;
+    /* rounded-md */
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -94,24 +114,29 @@
 .btn-ver,
 .btn-editar,
 .btn-eliminar {
-    background-color: #f56565; /* red-500 */
+    background-color: #f56565;
+    /* red-500 */
 }
 
 .btn-ver:hover,
 .btn-editar:hover,
 .btn-eliminar:hover {
-    background-color: #c53030; /* red-600 */
+    background-color: #c53030;
+    /* red-600 */
 }
 
 /* Mensaje de tabla vacía */
 .td-vacio {
     padding: 1rem 1.5rem;
     text-align: center;
-    color: #a0aec0; /* gray-500 */
+    color: #a0aec0;
+    /* gray-500 */
 }
 
 .filtro-busqueda input {
-    border: 1px solid #cbd5e0; /* gray-300 */
-    border-radius: 0.375rem; /* rounded-md */
+    border: 1px solid #cbd5e0;
+    /* gray-300 */
+    border-radius: 0.375rem;
+    /* rounded-md */
     font-size: 1rem;
 }
