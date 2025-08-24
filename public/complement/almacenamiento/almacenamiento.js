@@ -15,8 +15,8 @@ function fetchTabla() {
 }
 
 function renderTabla(headers, rows) {
-    // Excluir 'producto_id' de los headers para mostrar
-    const headersFiltrados = headers.filter(h => h !== 'producto_id');
+    // Excluir 'id' de los headers para mostrar
+    const headersFiltrados = headers.filter(h => h !== 'id');
 
     let html = '<table class="table-auto w-full border border-gray-300">';
     html += '<thead><tr>';
@@ -28,13 +28,13 @@ function renderTabla(headers, rows) {
     html += '</tr></thead><tbody>';
 
     rows.forEach(row => {
-        html += `<tr data-producto_id="${row.producto_id}">`;
+        html += `<tr data-id="${row.id}">`;
         headersFiltrados.forEach(header => {
             html += `<td class="border px-4 py-2">${row[header]}</td>`;
         });
         // Botón eliminar
         html += `<td class="border px-4 py-2 text-center">
-            <button class="btn btn-danger btn-eliminar" data-producto_id="${row.producto_id}">Eliminar</button>
+            <button class="btn btn-danger btn-eliminar" data-id="${row.id}">Eliminar</button>
         </td>`;
         html += '</tr>';
     });
@@ -49,7 +49,7 @@ function renderTabla(headers, rows) {
 function asignarEventosEliminar() {
     document.querySelectorAll('.btn-eliminar').forEach(btn => {
         btn.addEventListener('click', e => {
-            productoIdAEliminar = e.target.dataset.producto_id;
+            productoIdAEliminar = e.target.dataset.id;
             filaAEliminar = e.target.closest('tr');
             mostrarModalConfirmacion();
         });
