@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Tienda - Familia Fe y Esperanza</title>
+        <title>Fam Fe y Esperanza</title>
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <style>
@@ -78,7 +78,6 @@
     <body>
         <div class="card">
             <h1>Familia Fe y Esperanza</h1>
-            <p class="text-secondary">Tienda de Risitos y Delicias Típicas</p>
 
             <div class="login-links">
                 @if (Route::has('login'))
@@ -87,9 +86,6 @@
                             <a href="{{ url('/dashboard') }}" class="button">Ir a Dashboard</a>
                         @else
                             <a href="{{ route('login') }}" class="button">Iniciar Sesión</a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="button">Registrarse</a>
-                            @endif
                         @endauth
                     </div>
                 @endif
