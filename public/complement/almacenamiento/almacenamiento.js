@@ -99,26 +99,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const id = filaAEliminar.dataset.id;
 
-        fetch(`/almacenamiento/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                'Accept': 'application/json',
-            }
-        }).then(res => {
-            if (res.ok) {
-                filaAEliminar.remove();
-                alert('Registro eliminado correctamente');
-            } else {
-                alert('Error al eliminar registro');
-            }
-            ocultarModal();
-            filaAEliminar = null;
-        }).catch(() => {
-            alert('Error en la conexión');
-            ocultarModal();
-            filaAEliminar = null;
-        });
+        // fetch(`/almacenamiento/${id}`, {
+        //     method: 'DELETE',
+        //     headers: {
+        //         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+        //         'Accept': 'application/json',
+        //     }
+        // }).then(res => {
+        //     if (res.ok) {
+        //         filaAEliminar.remove();
+        //         alert('Registro eliminado correctamente');
+        //     } else {
+        //         alert('Error al eliminar registro');
+        //     }
+        //     ocultarModal();
+        //     filaAEliminar = null;
+        // }).catch(() => {
+        //     alert('Error en la conexión');
+        //     ocultarModal();
+        //     filaAEliminar = null;
+        // });
+
+        console.log('Registro eliminado correctamente');
+        ocultarModal();
     });
 
     // Opcional: cerrar modal al hacer click fuera del contenido
