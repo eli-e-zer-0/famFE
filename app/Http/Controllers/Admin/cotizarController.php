@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class cotizarController extends Controller
 {
@@ -12,7 +14,47 @@ class cotizarController extends Controller
      */
     public function index()
     {
-        return view('vistas.cotizar.cotizar');
+
+        $productos = DB::table('vws_Almacenamiento')->get();
+
+            $headers = [];
+            $rows = [];
+
+            if ($productos->count() > 0) {
+                $headers = array_keys((array) $productos->first());
+
+                foreach ($productos as $producto) {
+                    $rows[] = (array) $producto;
+                }
+            }
+
+            // agregar encabezado acciones
+            $headers[] = 'Acciones';
+
+        return view('vistas.cotizar.cotizar', compact('headers', 'rows'));
+    }
+
+    public function data()
+    {
+        try {
+            $productos = DB::table('vws_Almacenamiento')->get();
+
+            $headers = [];
+            $rows = [];
+
+            if ($productos->count() > 0) {
+                $headers = array_keys((array) $productos->first());
+
+                foreach ($productos as $producto) {
+                    $rows[] = (array) $producto;
+                }
+            }
+
+            return response()->json(['headers' => $headers, 'rows' => $rows], 200);
+        } catch (\Exception $e) {
+            Log::error('Error fetching almacenamiento data: ' . $e->getMessage());
+            return response()->json(['error' => 'Failed to fetch data'], 500);
+        }
     }
 
     /**

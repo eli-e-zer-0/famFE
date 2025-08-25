@@ -23,8 +23,6 @@ class almacenamientoController extends Controller
         try {
             $productos = DB::table('vws_Almacenamiento')->get();
 
-            Log::info('Productos: ' . $productos);
-
             $headers = [];
             $rows = [];
 

@@ -1,7 +1,7 @@
 <x-app-layout>
     <div>
         <h1>Cotizar</h1>
-        <p>Bienvenido a la sección de cotizar.</p>
+        <x-table :headers="$headers" :rows="$rows" />
     </div>
 </x-app-layout>
 

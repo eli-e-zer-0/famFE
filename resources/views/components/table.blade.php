@@ -23,9 +23,13 @@
                     {{ $cell }}
                 </td>
                 @endforeach
-                <td class="td-estilo td-acciones">
-                    <button class="btn btn-eliminar">Eliminar</button>
+
+                <td>
+                    <button class="btn-agregar">
+                        <i class="fas fa-shopping-cart"></i> Agregar
+                    </button>
                 </td>
+
             </tr>
             @empty
             <tr>
