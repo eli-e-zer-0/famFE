@@ -34,6 +34,5 @@
     </table>
 </div>
 
-<!-- asdf -->
 <link href="{{ asset('complement/table/table.css') }}" rel="stylesheet">
 <script src="{{ asset('complement/table/table.js') }}"></script>
