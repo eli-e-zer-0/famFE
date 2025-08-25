@@ -4,4 +4,3 @@
         <x-table :headers="$headers" :rows="$rows" />
     </div>
 </x-app-layout>
-
