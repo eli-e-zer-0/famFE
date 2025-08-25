@@ -47,25 +47,24 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const filasPorPagina = 5; // Cantidad de filas por página
-    const filas = Array.from(document.querySelectorAll('#tablaBody tr')); // Todas las filas (sin considerar filtro)
+    const filas = Array.from(document.querySelectorAll('#tablaBody tr')); // Todas las filas
     let paginaActual = 1;
 
     // Función para mostrar las filas según la página actual
     function mostrarFilas(pagina) {
-        const filasVisibles = filas.filter(fila => fila.style.display !== 'none'); // Solo filas visibles después del filtro
-        const totalFilas = filas.length; // Total de filas (sin considerar el filtro)
+        const filasVisibles = filas.filter(fila => fila.style.display !== 'none'); // Solo las filas visibles después del filtro
+        const totalFilas = filasVisibles.length; // Total de filas visibles
         const totalPaginas = Math.ceil(totalFilas / filasPorPagina);
 
+        // Calcular las filas a mostrar para la página actual
         const inicio = (pagina - 1) * filasPorPagina;
         const fin = pagina * filasPorPagina;
 
-        filas.forEach((fila, index) => {
-            if (index >= inicio && index < fin) {
-                fila.style.display = ''; // Mostrar la fila
-            } else {
-                fila.style.display = 'none'; // Ocultar la fila
-            }
-        });
+        // Ocultar todas las filas
+        filas.forEach(fila => fila.style.display = 'none');
+
+        // Mostrar solo las filas visibles que pertenecen a la página actual
+        filasVisibles.slice(inicio, fin).forEach(fila => fila.style.display = '');
 
         // Actualizar el número de página
         document.getElementById('pageNumber').textContent = pagina;
@@ -75,25 +74,31 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('nextBtn').disabled = pagina === totalPaginas;
     }
 
-    // Botón anterior
-    document.getElementById('prevBtn').addEventListener('click', function() {
-        if (paginaActual > 1) {
-            paginaActual--;
-            mostrarFilas(paginaActual);
-        }
-    });
-
-    // Botón siguiente
-    document.getElementById('nextBtn').addEventListener('click', function() {
+    // Función para mostrar la siguiente página
+    function siguientePagina() {
         const filasVisibles = filas.filter(fila => fila.style.display !== 'none');
-        const totalFilas = filas.length; // Total de filas (sin considerar el filtro)
+        const totalFilas = filasVisibles.length;
         const totalPaginas = Math.ceil(totalFilas / filasPorPagina);
 
         if (paginaActual < totalPaginas) {
             paginaActual++;
             mostrarFilas(paginaActual);
         }
-    });
+    }
+
+    // Función para mostrar la página anterior
+    function paginaAnterior() {
+        if (paginaActual > 1) {
+            paginaActual--;
+            mostrarFilas(paginaActual);
+        }
+    }
+
+    // Botón anterior
+    document.getElementById('prevBtn').addEventListener('click', paginaAnterior);
+
+    // Botón siguiente
+    document.getElementById('nextBtn').addEventListener('click', siguientePagina);
 
     // Mostrar las filas para la primera página
     mostrarFilas(paginaActual);
@@ -110,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 textoFila += celda.textContent.toLowerCase() + ' ';
             });
             const mostrar = textoFila.indexOf(filtro) > -1;
-            fila.style.display = mostrar ? '' : 'none'; // Ahora ocultamos correctamente las filas
+            fila.style.display = mostrar ? '' : 'none'; // Ocultar filas que no coinciden
         });
 
         // Resetear la paginación después de aplicar el filtro
@@ -152,6 +157,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Reagrupar filas ordenadas en tbody
             filasArray.forEach(fila => document.getElementById('tablaBody').appendChild(fila));
+
+            // Reajustar la paginación después de ordenar
+            mostrarFilas(paginaActual);
         });
     });
 });
